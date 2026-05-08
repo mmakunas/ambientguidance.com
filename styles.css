@@ -1,0 +1,192 @@
+/* Ambient Guidance — landing page
+   Colors and type are the visual identity. Don't drift from these without
+   updating the mockup first. */
+
+:root {
+    --bg: #f8f8ff;          /* off-white, faint lavender */
+    --ink: #001959;         /* deep navy — headings + body */
+    --highlight-fg: #ccff00; /* highlighter yellow-green */
+    --cta: #ff80c8;          /* hot pink CTA */
+    --content-max: 1000px;
+    --gutter: clamp(20px, 5vw, 64px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Atkinson Hyperlegible Next', system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: var(--content-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(40px, 8vh, 96px) var(--gutter) 32px;
+}
+
+/* Wordmark row — heavy display sans, optional logo at the end of the line */
+
+.wordmark-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(40px, 6vh, 64px);
+    /* Take the full content width so flex has the room to lay out wordmark +
+       logo on one line. Without this, the flex container shrinks to the
+       widest single child, causing siblings to wrap unnecessarily. */
+    width: 100%;
+    /* Inherit font-size so child em-units (logo height) match the wordmark
+       sizing without each element having to redeclare the clamp(). */
+    font-size: clamp(40px, 7vw, 76px);
+}
+
+.wordmark {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1em; /* inherits from .wordmark-row */
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    /* Don't wrap mid-name. The phrase is two words but reads as one mark.
+       Mobile breakpoint (below) lifts this. */
+    white-space: nowrap;
+}
+
+.logo {
+    /* Match the wordmark's cap height. line-height: 1 means 1em ≈ glyph
+       em-box, which sits visually next to the type at the right balance.
+       Width is computed from the SVG's intrinsic aspect ratio (~1.357:1),
+       set explicitly so flex layout knows the dimensions before rendering
+       and won't wrap the logo to its own line on wide viewports. */
+    height: 1em; /* inherits from .wordmark-row */
+    width: 1.357em;
+    flex-shrink: 0;
+}
+
+/* Below ~520px (where wordmark+logo no longer fit on one line), allow the
+   wordmark to break between the two words. The logo will sit on its own line
+   below per the mockup. */
+@media (max-width: 520px) {
+    .wordmark {
+        white-space: normal;
+    }
+}
+
+/* Body copy section */
+
+.copy h2 {
+    font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 28px);
+    margin-bottom: 16px;
+    color: var(--ink);
+}
+
+.copy p {
+    margin-bottom: 20px;
+    /* Match the visual width of the wordmark + logo row above. The wordmark
+       at its max font size is ~663px wide; with the logo and gap that's
+       ~780px. Anchoring body copy to this width keeps the left/right edges
+       aligned across the page. Below this breakpoint the container is
+       already narrower than 780px so this caps nothing. */
+    max-width: 780px;
+}
+
+.copy p:last-child {
+    margin-bottom: 0;
+}
+
+/* Inline highlights — the yellow-green marker effect.
+   Using <mark> for semantic + a11y reasons. */
+
+mark {
+    background-color: var(--highlight-fg);
+    color: var(--ink);
+    padding: 0 2px;
+    font-weight: 700;
+}
+
+/* CTA row — monospace pill with hot-pink fill, arrows on either side */
+
+.cta-row {
+    margin-top: clamp(36px, 6vh, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cta-arrow {
+    font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+    font-weight: 400;
+    font-size: clamp(18px, 2.5vw, 22px);
+    color: var(--ink);
+}
+
+.cta {
+    font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+    font-weight: 700;
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background-color: var(--cta);
+    padding: 4px 10px;
+    transition: filter 0.15s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+    filter: brightness(0.95);
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+/* Footer — single privacy link, low contrast on purpose */
+
+footer {
+    max-width: var(--content-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px var(--gutter);
+    font-size: 14px;
+}
+
+footer a {
+    color: var(--ink);
+    opacity: 0.6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    opacity: 1;
+}
+
+/* Reduce motion: kill the only transition we have */
+
+@media (prefers-reduced-motion: reduce) {
+    .cta {
+        transition: none;
+    }
+}
