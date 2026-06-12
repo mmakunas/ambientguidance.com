@@ -17,6 +17,12 @@
     padding: 0;
 }
 
+/* display: flex/inline-block on a class would otherwise beat the UA's
+   [hidden] { display: none }, un-hiding gated elements. */
+[hidden] {
+    display: none !important;
+}
+
 html, body {
     background: var(--bg);
     color: var(--ink);
@@ -161,6 +167,104 @@ mark {
     outline-offset: 2px;
 }
 
+/* Gate — access-code unlock + interest capture. Same type system as the
+   body copy; inputs and buttons use the mono/CTA language. */
+
+.gate {
+    margin-top: clamp(36px, 6vh, 56px);
+    max-width: 780px;
+}
+
+.gate h2 {
+    font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 28px);
+    margin-bottom: 12px;
+}
+
+.gate h2 + .gate-form {
+    margin-bottom: 28px;
+}
+
+.gate p {
+    margin-bottom: 12px;
+}
+
+.gate-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.gate-form input {
+    font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+    font-size: 16px;
+    color: var(--ink);
+    background: transparent;
+    border: 2px solid var(--ink);
+    padding: 6px 10px;
+    min-width: 0;
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+.gate-form input::placeholder {
+    color: var(--ink);
+    opacity: 0.45;
+}
+
+.gate-form input:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.gate-button {
+    font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    background-color: var(--cta);
+    border: none;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+
+.gate-button:hover,
+.gate-button:focus-visible {
+    filter: brightness(0.95);
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.gate-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.gate-error {
+    font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+    font-size: 15px;
+    margin-top: -16px;
+}
+
+.gate-thanks {
+    font-weight: 700;
+    background-color: var(--highlight-fg);
+    display: inline-block;
+    padding: 0 4px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 /* Footer — single privacy link, low contrast on purpose */
 
 footer {
@@ -186,7 +290,8 @@ footer a:focus-visible {
 /* Reduce motion: kill the only transition we have */
 
 @media (prefers-reduced-motion: reduce) {
-    .cta {
+    .cta,
+    .gate-button {
         transition: none;
     }
 }

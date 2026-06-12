@@ -20,10 +20,12 @@
         </header>
 
         <section class="copy">
-            <h2>GFM</h2>
+            <h2>Pay Attention To Yourself.</h2>
+Ambient Guidance builds products that use the minimum effective dose of technology to guide you towards realizing something. The technology is always present but you neither forget about it nor do you continually bring it to the forefront of your attention. You always know it’s there and you know what it’s doing but only a minimum of attention is placed on it.
+            <h2>Have an Apple Watch?</h2>
 
             <p>
-                GFM is the first product from Ambient Guidance —
+                The first product from Ambient Guidance is
                 <mark>a WatchOS app</mark> for users with
                 <mark>fragile attention</mark> that generates a
                 <mark>MET-hours optimized walking</mark> route in
@@ -41,15 +43,39 @@
             </p>
         </section>
 
-        <p class="cta-row">
-            <span class="cta-arrow" aria-hidden="true">→</span>
-            <a class="cta" href="https://testflight.apple.com/join/5UGnY5BD">GFM pre-Alpha on TestFlight</a>
-            <span class="cta-arrow" aria-hidden="true">←</span>
-        </p>
+        <section class="gate">
+            <div id="gate-locked">
+                <h2>Have an access code?</h2>
+                <form id="code-form" class="gate-form" autocomplete="off">
+                    <label class="visually-hidden" for="code">Access code</label>
+                    <input type="password" id="code" name="code" placeholder="access code" required>
+                    <button type="submit" class="gate-button">Unlock</button>
+                </form>
+                <p id="code-error" class="gate-error" hidden>That code didn&rsquo;t work. Check it and try again.</p>
+
+                <h2>Want in?</h2>
+                <p>Leave your email and we&rsquo;ll send you an access code when a spot opens up.</p>
+                <form id="interest-form" class="gate-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <label class="visually-hidden" for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    <button type="submit" class="gate-button">Register interest</button>
+                </form>
+                <p id="interest-error" class="gate-error" hidden>Something went wrong. Please try again in a minute.</p>
+                <p id="interest-thanks" class="gate-thanks" hidden>Thanks &mdash; you&rsquo;re on the list.</p>
+            </div>
+
+            <p class="cta-row" id="gate-unlocked" hidden>
+                <span class="cta-arrow" aria-hidden="true">→</span>
+                <a class="cta" id="cta-link" href="#">GFM pre-Alpha on TestFlight</a>
+                <span class="cta-arrow" aria-hidden="true">←</span>
+            </p>
+        </section>
     </main>
 
     <footer>
         <a href="https://www.makunas.com/gfm/privacy.html">Privacy</a>
     </footer>
+
+    <script src="gate.js"></script>
 </body>
 </html>
