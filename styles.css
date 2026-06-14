@@ -7,7 +7,7 @@
     --ink: #001959;         /* deep navy — headings + body */
     --highlight-fg: #ccff00; /* highlighter yellow-green */
     --cta: #ff80c8;          /* hot pink CTA */
-    --content-max: 1000px;
+    --measure: 620px;        /* shared reading measure — column width */
     --gutter: clamp(20px, 5vw, 64px);
 }
 
@@ -27,8 +27,11 @@ html, body {
     background: var(--bg);
     color: var(--ink);
     font-family: 'Atkinson Hyperlegible Next', system-ui, -apple-system, sans-serif;
-    font-size: 17px;
-    line-height: 1.55;
+    /* Fluid body size: 17px on tablet/desktop, shrinking toward 14px on phones
+       so more of the page — including the gate inputs/buttons — fits above the
+       fold without scrolling. Most spacing is em-based, so it tightens too. */
+    font-size: clamp(14px, 3.6vw, 17px);
+    line-height: 1.4;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -41,10 +44,12 @@ body {
 
 main {
     flex: 1;
-    max-width: var(--content-max);
+    /* The column width = reading measure + the gutters on each side, so the
+       620px content block centers in the viewport with equal margins. */
+    max-width: calc(var(--measure) + 2 * var(--gutter));
     width: 100%;
     margin: 0 auto;
-    padding: clamp(40px, 8vh, 96px) var(--gutter) 32px;
+    padding: clamp(28px, 7vh, 96px) var(--gutter) 32px;
 }
 
 /* Wordmark row — heavy display sans, optional logo at the end of the line */
@@ -52,16 +57,15 @@ main {
 .wordmark-row {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: clamp(40px, 6vh, 64px);
-    /* Take the full content width so flex has the room to lay out wordmark +
-       logo on one line. Without this, the flex container shrinks to the
-       widest single child, causing siblings to wrap unnecessarily. */
+    gap: 0.16em;
+    margin-bottom: clamp(24px, 5vh, 64px);
     width: 100%;
-    /* Inherit font-size so child em-units (logo height) match the wordmark
-       sizing without each element having to redeclare the clamp(). */
-    font-size: clamp(40px, 7vw, 76px);
+    /* Wordmark + logo must always sit on one line within the reading measure.
+       "Ambient Guidance" in Jost 800 is ~9.0em wide; with the logo (1.357em)
+       and gap (~0.16em) the row needs ~10.5em. Capping the font at measure/10.5
+       (~59px) keeps it on one line at the column's full width; the vw term
+       shrinks it together on narrower viewports. */
+    font-size: min(59px, 9vw);
 }
 
 .wordmark {
@@ -71,8 +75,8 @@ main {
     line-height: 1;
     letter-spacing: -0.01em;
     color: var(--ink);
-    /* Don't wrap mid-name. The phrase is two words but reads as one mark.
-       Mobile breakpoint (below) lifts this. */
+    /* Two words, one mark — never break mid-name. The row's font-size shrinks
+       the whole row on narrow viewports instead of wrapping. */
     white-space: nowrap;
 }
 
@@ -87,15 +91,6 @@ main {
     flex-shrink: 0;
 }
 
-/* Below ~520px (where wordmark+logo no longer fit on one line), allow the
-   wordmark to break between the two words. The logo will sit on its own line
-   below per the mockup. */
-@media (max-width: 520px) {
-    .wordmark {
-        white-space: normal;
-    }
-}
-
 /* Body copy section */
 
 .copy h2 {
@@ -108,12 +103,6 @@ main {
 
 .copy p {
     margin-bottom: 20px;
-    /* Match the visual width of the wordmark + logo row above. The wordmark
-       at its max font size is ~663px wide; with the logo and gap that's
-       ~780px. Anchoring body copy to this width keeps the left/right edges
-       aligned across the page. Below this breakpoint the container is
-       already narrower than 780px so this caps nothing. */
-    max-width: 780px;
 }
 
 .copy p:last-child {
@@ -128,6 +117,16 @@ mark {
     color: var(--ink);
     padding: 0 2px;
     font-weight: 700;
+}
+
+/* Inline brand mention — the wordmark's display font (Jost) set in running copy.
+   Bumped slightly because Jost's x-height is smaller than the body font; this
+   makes the lowercase visually match the surrounding text. */
+.brand {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.05em;
+    letter-spacing: -0.01em;
 }
 
 /* CTA row — monospace pill with hot-pink fill, arrows on either side */
@@ -171,8 +170,37 @@ mark {
    body copy; inputs and buttons use the mono/CTA language. */
 
 .gate {
-    margin-top: clamp(36px, 6vh, 56px);
-    max-width: 780px;
+    margin-top: clamp(16px, 3vh, 28px);
+}
+
+/* Two side-by-side columns (access code | interest). Each column is a flex
+   column that pushes its form to the bottom, keeping both input boxes on the
+   same baseline even if the columns ever differ in height. */
+#gate-locked {
+    display: flex;
+    gap: clamp(20px, 4vw, 40px);
+    align-items: stretch;
+}
+
+.gate-col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.gate-col .gate-form {
+    margin-top: auto;
+}
+
+/* Stack the two columns vertically on narrow viewports. The forms themselves
+   always stay input-over-button (see .gate-form), so the Unlock and Register
+   buttons break in lockstep at every width — never one beside, one below. */
+@media (max-width: 560px) {
+    #gate-locked {
+        flex-direction: column;
+        gap: clamp(28px, 6vw, 36px);
+    }
 }
 
 .gate h2 {
@@ -182,19 +210,18 @@ mark {
     margin-bottom: 12px;
 }
 
-.gate h2 + .gate-form {
-    margin-bottom: 28px;
-}
-
 .gate p {
     margin-bottom: 12px;
 }
 
+/* Both forms always stack input-over-button (never input-beside-button), so the
+   Unlock and Register buttons break in lockstep at every width. Spacing between
+   the two columns/rows comes from #gate-locked's gap, not a form margin. */
 .gate-form {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
 }
 
 .gate-form input {
@@ -205,7 +232,7 @@ mark {
     border: 2px solid var(--ink);
     padding: 6px 10px;
     min-width: 0;
-    flex: 1 1 220px;
+    width: 100%;
     max-width: 320px;
 }
 
@@ -268,7 +295,7 @@ mark {
 /* Footer — single privacy link, low contrast on purpose */
 
 footer {
-    max-width: var(--content-max);
+    max-width: calc(var(--measure) + 2 * var(--gutter));
     width: 100%;
     margin: 0 auto;
     padding: 24px var(--gutter);

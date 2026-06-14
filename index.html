@@ -21,7 +21,7 @@
 
         <section class="copy">
             <h2>Pay Attention To Yourself.</h2>
-Ambient Guidance builds products that use the minimum effective dose of technology to guide you towards realizing something. The technology is always present but you neither forget about it nor do you continually bring it to the forefront of your attention. You always know it’s there and you know what it’s doing but only a minimum of attention is placed on it.
+            <p><strong class="brand">Ambient Guidance</strong> builds products that use the <mark>minimum effective dose of technology</mark> to guide you towards realizing something. The technology is always present but you neither forget about it nor do you continually bring it to the forefront of your attention. You always know it’s there and you know what it’s doing but only a minimum of attention is placed on it.</p>
             <h2>Have an Apple Watch?</h2>
 
             <p>
@@ -45,23 +45,26 @@ Ambient Guidance builds products that use the minimum effective dose of technolo
 
         <section class="gate">
             <div id="gate-locked">
-                <h2>Have an access code?</h2>
-                <form id="code-form" class="gate-form" autocomplete="off">
-                    <label class="visually-hidden" for="code">Access code</label>
-                    <input type="password" id="code" name="code" placeholder="access code" required>
-                    <button type="submit" class="gate-button">Unlock</button>
-                </form>
-                <p id="code-error" class="gate-error" hidden>That code didn&rsquo;t work. Check it and try again.</p>
+                <div class="gate-col">
+                    <h2>Have an access code?</h2>
+                    <form id="code-form" class="gate-form" autocomplete="off">
+                        <label class="visually-hidden" for="code">Access code</label>
+                        <input type="password" id="code" name="code" placeholder="access code" required>
+                        <button type="submit" class="gate-button">Unlock</button>
+                    </form>
+                    <p id="code-error" class="gate-error" hidden>That code didn&rsquo;t work. Check it and try again.</p>
+                </div>
 
-                <h2>Want in?</h2>
-                <p>Leave your email and we&rsquo;ll send you an access code when a spot opens up.</p>
-                <form id="interest-form" class="gate-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <label class="visually-hidden" for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
-                    <button type="submit" class="gate-button">Register interest</button>
-                </form>
-                <p id="interest-error" class="gate-error" hidden>Something went wrong. Please try again in a minute.</p>
-                <p id="interest-thanks" class="gate-thanks" hidden>Thanks &mdash; you&rsquo;re on the list.</p>
+                <div class="gate-col">
+                    <h2>Don&rsquo;t but want in?</h2>
+                    <form id="interest-form" class="gate-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <label class="visually-hidden" for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        <button type="submit" class="gate-button">Register interest</button>
+                    </form>
+                    <p id="interest-error" class="gate-error" hidden>Something went wrong. Please try again in a minute.</p>
+                    <p id="interest-thanks" class="gate-thanks" hidden>Thanks, we&rsquo;ll send you an access code when a spot opens up.</p>
+                </div>
             </div>
 
             <p class="cta-row" id="gate-unlocked" hidden>
