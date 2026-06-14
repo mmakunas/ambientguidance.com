@@ -292,6 +292,18 @@ mark {
     white-space: nowrap;
 }
 
+/* Spam honeypot — a decoy field bots fill but humans never see (Formspree drops
+   submissions where _gotcha is non-empty). Pulled fully off-screen with
+   !important so the .gate-form input sizing rules can't drag it back on-screen. */
+.honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 /* Footer — single privacy link, low contrast on purpose */
 
 footer {

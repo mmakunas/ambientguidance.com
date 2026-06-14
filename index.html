@@ -60,6 +60,7 @@
                     <form id="interest-form" class="gate-form" action="https://formspree.io/f/xdavybvw" method="POST">
                         <label class="visually-hidden" for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
                         <button type="submit" class="gate-button">Register interest</button>
                     </form>
                     <p id="interest-error" class="gate-error" hidden>Something went wrong. Please try again in a minute.</p>
