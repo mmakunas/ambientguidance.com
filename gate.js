@@ -4,9 +4,9 @@
    To change the code or URL: node tools/encrypt-gate.mjs <code> <url>,
    then replace SALT/IV/CIPHERTEXT below. */
 
-const SALT = 'WvaxtwiAi2c01jTYiip8EA==';
-const IV = 'r0SBzDARhbg2rNqc';
-const CIPHERTEXT = '7jFF5P8lE+HbQkjDcheWgJTa40WIvqY4PL37Kk4SMF+5tNdp7BYP1HpW9fwqWx/6l9zNJz9Bh+mm2w==';
+const SALT = 'VBUCL226+AYBlscQ9PrY2w==';
+const IV = 'HwWmyGZ+hlACDehm';
+const CIPHERTEXT = 'fQxqjA1htO0XDfbLAyEVxKwz5AzoVqlSXsRb5pgkM6EhTEUULBkIjTHhSSR29nS9HdfGjfOdrsR0Gg==';
 const PBKDF2_ITERATIONS = 310000;
 
 const b64ToBytes = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
