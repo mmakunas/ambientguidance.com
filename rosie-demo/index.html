@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosie — Ambient Guidance</title>
+    <meta name="description" content="Rosie demo — a family assistant from Ambient Guidance.">
+    <!-- Unlinked page: not in the site nav, not indexed. Shared by direct link only. -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@800&family=Atkinson+Hyperlegible+Next:wght@400;700&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .video {
+            /* 16:9 frame at the reading measure; the iframe fills it. */
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--ink);
+            margin: clamp(20px, 4vh, 36px) 0;
+        }
+        .video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-pending {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg);
+            font-family: 'Atkinson Hyperlegible Mono', ui-monospace, monospace;
+            text-align: center;
+            padding: 0 1em;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header class="wordmark-row">
+            <h1 class="wordmark">Ambient Guidance</h1>
+            <img src="../logo.svg" alt="" class="logo" aria-hidden="true">
+        </header>
+
+        <section class="copy">
+            <h2>Rosie</h2>
+            <p>
+                A <mark>family assistant</mark> that holds the week for every
+                adult in the house: who is where, who drives, what is still
+                undecided, and what moved since yesterday. <mark>Local
+                intelligence</mark>, <mark>multiplayer AI</mark>, one page the
+                whole household reads.
+            </p>
+
+            <div class="video" id="video">
+                <p class="video-pending" id="video-pending">Demo video arriving shortly.</p>
+            </div>
+
+            <p>
+                Recorded by Michael and Jenny Makunas, November 2026.
+                Questions: <a href="mailto:michael@makunas.com">michael@makunas.com</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="../">Ambient Guidance</a>
+    </footer>
+
+    <script>
+        // ── To update the demo: paste the unlisted YouTube video id between the quotes on the next line and commit.
+        //    The id is the part after "v=" (or after "youtu.be/") in the YouTube link, e.g. "dQw4w9WgXcQ".
+        const VIDEO_ID = "";
+        // ──
+        if (VIDEO_ID) {
+            const frame = document.createElement("iframe");
+            frame.src = "https://www.youtube-nocookie.com/embed/" + VIDEO_ID + "?rel=0&modestbranding=1";
+            frame.title = "Rosie demo";
+            frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            frame.allowFullscreen = true;
+            const box = document.getElementById("video");
+            document.getElementById("video-pending").remove();
+            box.appendChild(frame);
+        }
+    </script>
+</body>
+</html>
