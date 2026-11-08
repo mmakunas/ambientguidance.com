@@ -1,0 +1,8 @@
+{
+  "min_gstack_version": "1.0.0",
+  "review": {
+    "platform": "on"
+  },
+  "plan_record": "warn",
+  "queue": "per-pr"
+}

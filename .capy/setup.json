@@ -1,0 +1,5 @@
+{
+  "commands": {
+    "test": "bash scripts/check-site.sh"
+  }
+}
