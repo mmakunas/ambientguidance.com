@@ -1,0 +1,15 @@
+{
+  "$schema": "https://api.capy.ai/schemas/setup.v1.json",
+  "format_version": 1,
+  "scripts": {
+    "initialize": "true",
+    "refresh": "true"
+  },
+  "commands": [
+    {
+      "name": "test",
+      "command": "bash scripts/check-site.sh"
+    }
+  ],
+  "startup": []
+}

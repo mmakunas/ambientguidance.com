@@ -1,1 +1,3 @@
-.gstack/
+.gstack/*
+!.gstack/ship-policy.json
+!.gstack/plain-titles.json
