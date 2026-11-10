@@ -19,7 +19,13 @@ step "CNAME"
 
 step "No plaintext TestFlight link"
 needle="testflight.apple"".com"
-if git grep -I -i -n -e "$needle" -- . ':!scripts/check-site.sh'; then bad "plaintext TestFlight link found"; fi
+rc=0
+git grep -I -i -n --untracked -e "$needle" -- . ':!scripts/check-site.sh' || rc=$?
+if [ "$rc" -eq 0 ]; then
+    bad "plaintext TestFlight link found"
+elif [ "$rc" -gt 1 ]; then
+    bad "TestFlight scan could not run (git grep exit $rc)"
+fi
 
 [ "$fail" -eq 0 ] && echo && echo "site checks passed"
 exit "$fail"
