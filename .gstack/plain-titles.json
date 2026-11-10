@@ -1,8 +1,6 @@
 {
-  "rule": "Plain words in PR titles, branches, and commit subjects. No 'word(scope):' prefixes.",
-  "forbid_prefix_pattern": "^[a-z]+(\\([^)]*\\))?!?:",
-  "pr_body": {
-    "opens_with": "one or two plain sentences",
-    "machine_lines_under": "<!-- gstack:agent-notes -->"
-  }
+  "$schema": "https://github.com/garrytan/gstack/blob/main/docs/ship-policy.md#plain-titles",
+  "codes": [],
+  "terms": [],
+  "since": "2026-11-08"
 }
