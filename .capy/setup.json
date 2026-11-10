@@ -2,8 +2,8 @@
   "$schema": "https://api.capy.ai/schemas/setup.v1.json",
   "format_version": 1,
   "scripts": {
-    "initialize": "true",
-    "refresh": "true"
+    "initialize": "set -euo pipefail\nrm -rf \"$HOME/.local/share/gstack\"\ngit clone --single-branch --depth 1 https://github.com/garrytan/gstack.git \"$HOME/.local/share/gstack\"\n\"$HOME/.local/share/gstack/bin/gstack-capy-install\" --require claude,codex,patch",
+    "refresh": "set -euo pipefail\ntrue"
   },
   "commands": [
     {
