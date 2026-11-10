@@ -1,5 +1,7 @@
 {
-  "commands": {
-    "test": "bash scripts/check-site.sh"
-  }
+  "$schema": "https://api.capy.ai/schemas/setup.v1.json",
+  "format_version": 1,
+  "commands": [
+    { "name": "test", "command": "bash scripts/check-site.sh" }
+  ]
 }
