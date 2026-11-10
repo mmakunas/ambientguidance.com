@@ -1,8 +1,8 @@
 {
-  "min_gstack_version": "1.0.0",
+  "min_gstack_version": "1.98.0.0",
   "review": {
     "platform": "on"
   },
   "plan_record": "warn",
-  "queue": "per-pr"
+  "queue_mode": "claim-at-open"
 }
